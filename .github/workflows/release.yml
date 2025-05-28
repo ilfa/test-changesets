@@ -45,5 +45,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
+          commitMode: github-api
           version: bash ./changeset-version.sh
           publish: bash ./changeset-publish.sh
