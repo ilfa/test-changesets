@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "rc",
+  "initialVersions": {
+    "test-changesets": "1.0.1"
+  },
+  "changesets": []
+}
