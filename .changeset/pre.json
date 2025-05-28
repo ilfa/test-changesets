@@ -4,5 +4,7 @@
   "initialVersions": {
     "test-changesets": "1.0.1"
   },
-  "changesets": []
+  "changesets": [
+    "bitter-monkeys-go"
+  ]
 }
