@@ -23,15 +23,16 @@ jobs:
       - name: 'Install changeset'
         run: 'pnpm install @changesets/cli --global'
 
-      - uses: bluwy/detect-changesets-action@v1
-        id: check
+      - name: Determine if publish is needed
+        id: determine_publish
+        uses: ./.github/actions/determine-changeset-publish
 
       - name: Show has changesets status true
-        if: steps.check.outputs.has-changesets == 'true'
+        if: steps.determine_publish.outputs.publish == 'true'
         run: echo "pr!"
 
       - name: Show has changesets status false
-        if: steps.check.outputs.has-changesets == 'false'
+        if: steps.determine_publish.outputs.publish == 'false'
         run: echo "release!"
 
       - name: Create Release Pull Request

@@ -1,0 +1,9 @@
+name: Determine Changeset Publish
+description: Determine if publish should run based on changeset status
+inputs: {}
+outputs:
+  publish:
+    description: "Whether publish step should be run"
+runs:
+  using: "node20"
+  main: "index.js"
