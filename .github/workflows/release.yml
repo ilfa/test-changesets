@@ -26,13 +26,13 @@ jobs:
       - uses: bluwy/detect-changesets-action@v1
         id: check
 
-      - name: Show release status true
+      - name: Show has changesets status true
         if: steps.check.outputs.has-changesets == 'true'
-        run: echo "release!"
-
-      - name: Show release status false
-        if: steps.check.outputs.has-changesets == 'false'
         run: echo "pr!"
+
+      - name: Show has changesets status false
+        if: steps.check.outputs.has-changesets == 'false'
+        run: echo "release!"
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
