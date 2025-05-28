@@ -12,6 +12,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.6.4",
   "dependencies": {
+    "@actions/core": "^1.11.1",
     "@changesets/cli": "^2.29.4"
   }
 }
