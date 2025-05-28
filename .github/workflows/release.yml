@@ -42,5 +42,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          version: pnpm exec changeset version
-          publish: pnpm exec changeset publish
+          version: bash ./changeset-version.sh
+          publish: bash ./changeset-publish.sh
