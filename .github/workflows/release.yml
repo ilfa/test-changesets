@@ -23,21 +23,15 @@ jobs:
       - name: 'Install changeset'
         run: 'pnpm install @changesets/cli --global'
 
-      - name: Check release status
+      - uses: bluwy/detect-changesets-action@v1
         id: check
-        run: |
-          if pnpm exec changeset status; then
-            echo "pending=true" >> $GITHUB_OUTPUT
-          else
-            echo "pending=false" >> $GITHUB_OUTPUT
-          fi
 
       - name: Show release status true
-        if: steps.check.outputs.pending == 'true'
+        if: steps.check.outputs.has-changesets == 'true'
         run: echo "release!"
 
       - name: Show release status false
-        if: steps.check.outputs.pending == 'false'
+        if: steps.check.outputs.has-changesets == 'false'
         run: echo "pr!"
 
       - name: Create Release Pull Request
