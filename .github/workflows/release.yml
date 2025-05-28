@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Check release status
+        id: check
+        run: |
+          if pnpm exec changeset status; then
+            echo "pending=true" >> $GITHUB_OUTPUT
+          else
+            echo "pending=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Show release status true
+        if: steps.check.outputs.pending == 'true'
+        run: echo "release!"
+
+      - name: Show release status false
+        if: steps.check.outputs.pending == 'false'
+        run: echo "pr!"
+
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
