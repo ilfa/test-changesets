@@ -4,10 +4,13 @@ const core = require('@actions/core');
 
 try {
   // Collect changesets statss
-  execSync('npx changeset status --output status.json', { stdio: 'inherit' });
+  const random = Math.random().toString(36).slice(2, 10);
+  const statusPath = `changeset-status-${random}.json`
+  execSync(`npx changeset status --output "${statusPath}"`, { stdio: 'inherit' });
 
   // Read status
-  const status = JSON.parse(fs.readFileSync('status.json', 'utf-8'));
+  const status = JSON.parse(fs.readFileSync(statusPath, 'utf-8'));
+  fs.unlinkSync(statusPath);
 
   console.log(status)
   // If changesets array empty — we need to run publish

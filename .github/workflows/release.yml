@@ -30,13 +30,13 @@ jobs:
         id: determine_publish
         uses: ./.github/actions/determine-changeset-publish
 
-      - name: Show has changesets status true
+      - name: Show has determine_publish status true
         if: steps.determine_publish.outputs.publish == 'true'
-        run: echo "pr!"
+        run: echo "publish!"
 
-      - name: Show has changesets status false
+      - name: Show determine_publish status false
         if: steps.determine_publish.outputs.publish == 'false'
-        run: echo "release!"
+        run: echo "pr!"
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
