@@ -1,5 +1,11 @@
 # test-changesets
 
+## 1.1.0
+
+### Minor Changes
+
+- 5ff9590: test prerelease
+
 ## 1.1.0-rc.0
 
 ### Minor Changes
