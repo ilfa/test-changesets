@@ -1,5 +1,11 @@
 # test-changesets
 
+## 1.1.1
+
+### Patch Changes
+
+- b228af7: test release
+
 ## 1.1.0
 
 ### Minor Changes
