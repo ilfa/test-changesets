@@ -1,5 +1,11 @@
 # test-changesets
 
+## 1.1.2
+
+### Patch Changes
+
+- 72e61de: test release
+
 ## 1.1.1
 
 ### Patch Changes
