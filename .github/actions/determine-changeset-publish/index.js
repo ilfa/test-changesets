@@ -13,11 +13,17 @@ try {
   fs.unlinkSync(statusPath);
 
   console.log(status)
-  // If changesets array empty — we need to run publish
-  const shouldPublish = status.changesets && status.changesets.length === 0;
+  let action = 'none';
+  if (status.changesets && status.changesets.length > 0) {
+    action = 'pr';        // PR will be created
+  } else if (status.releases && status.releases.length > 0) {
+    action = 'publish';   // Publish
+  } else {
+    action = 'none';      // Do nothing
+  }
 
-  core.setOutput('publish', shouldPublish ? 'true' : 'false');
-  console.log(`[determine-changeset-publish] publish=${shouldPublish ? 'true' : 'false'}`);
+  core.setOutput('action', action); // action = 'pr' | 'publish' | 'none'
+  console.log(`[determine-changeset-publish] action=${action}`);
 } catch (err) {
   core.setFailed(err.message);
 }
