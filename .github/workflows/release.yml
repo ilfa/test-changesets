@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: 'Install changeset'
+        run: 'pnpm install @changesets/cli --global'
+
       - name: Check release status
         id: check
         run: |
