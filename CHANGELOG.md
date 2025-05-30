@@ -1,5 +1,11 @@
 # test-changesets
 
+## 1.2.0
+
+### Minor Changes
+
+- bf5d575: test release
+
 ## 1.2.0-rc.0
 
 ### Minor Changes
