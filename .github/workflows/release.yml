@@ -7,46 +7,15 @@ on:
 
 jobs:
   release:
-    name: Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: 'Install changeset'
-        run: 'pnpm install @changesets/cli --global'
-      
-      - name: 'Install deps'
-        run: 'pnpm install'
-
-      - name: Determine if publish is needed
-        id: determine_publish
-        uses: ./.github/actions/determine-changeset-publish
-
-      - name: Show has determine_publish action publish
-        if: steps.determine_publish.outputs.action == 'publish'
-        run: echo "publish!"
-
-      - name: Show determine_publish action pr
-        if: steps.determine_publish.outputs.action == 'pr'
-        run: echo "pr!"
-
-      - name: Show determine_publish action none
-        if: steps.determine_publish.outputs.action == 'none'
-        run: echo "do nothing!"
-
-      - name: Create Release Pull Request
-        uses: changesets/action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        with:
-          commitMode: github-api
-          version: bash ./changeset-version.sh
-          publish: bash ./changeset-publish.sh
+    name: 'Release project'
+    uses: fingerprintjs/dx-team-toolkit/.github/workflows/release-sdk-changesets.yml@934946a72ff252e83a28468a094a90ae94ad7b1e
+    with:
+      appId: ${{ vars.APP_ID }}
+      runnerAppId: ${{ vars.APP_ID }}
+      version-command: bash ./changeset-version.sh
+      publish-command: bash ./changeset-publish.sh
+      language: python
+      language-version: '3.12'
+    secrets:
+      APP_PRIVATE_KEY: ${{ secrets.APP_ENV_KEY }}
+      RUNNER_APP_PRIVATE_KEY: ${{ secrets.APP_KEY }}
