@@ -1,5 +1,11 @@
 # test-changesets
 
+## 1.2.1-rc.0
+
+### Patch Changes
+
+- 253a15b: Test prerelease
+
 ## 1.2.0
 
 ### Minor Changes
